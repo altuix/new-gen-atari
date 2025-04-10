@@ -2,6 +2,7 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import Cell from "./components/cell";
 import { checkWinner } from "./winCases";
+import getOpponentMove from "./opponent";
 
 export default function GameBoard() {
   const [gameState, SetGameState] = useState<string[][]>([
@@ -11,14 +12,31 @@ export default function GameBoard() {
   ]);
   const [gameWinner, setGameWinner] = useState<string | null>(null);
   const [xTurn, SetXTurn] = useState<boolean>(true);
+  const [vsAI, SetVsAI] = useState<boolean>(true);
 
   useEffect(() => {
     const winner = checkWinner(gameState);
+
     if (winner != null) {
       setGameWinner(winner);
+      return;
     }
+
+    if (!xTurn && vsAI) opponentMove();
     console.log("effect", winner);
   }, [xTurn, gameState]);
+
+  const opponentMove = async () => {
+    try {
+      let move = await getOpponentMove(gameState);
+      console.log("move", move);
+      cellAction(move);
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(`Opponent move request failed: ${error.message}`);
+      }
+    }
+  };
 
   const cellAction = (cellId: string) => {
     const [row, col] = cellId.split("_").map(Number);
@@ -48,6 +66,7 @@ export default function GameBoard() {
           <Cell
             key={`${rowIndex}_${itemIndex}`}
             cellId={`${rowIndex}_${itemIndex}`}
+            disable={!xTurn && vsAI}
             cellAction={cellAction}
           >
             {cell === "0" ? "" : cell}
@@ -68,7 +87,7 @@ export default function GameBoard() {
     setGameWinner(null);
     SetXTurn(true);
   };
-  
+
   return (
     <>
       {!gameWinner && (
