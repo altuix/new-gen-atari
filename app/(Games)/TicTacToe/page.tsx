@@ -22,16 +22,16 @@ export default function GameBoard() {
       return;
     }
 
-    if (!xTurn && vsAI) opponentMove();
-    console.log("effect", winner);
+    if (!xTurn && vsAI) opponentAiMove();
   }, [xTurn, gameState]);
 
-  const opponentMove = async () => {
+  const opponentAiMove = async () => {
     try {
       let move = await getOpponentMove(gameState);
       console.log("move", move);
       cellAction(move);
     } catch (error) {
+      console.log("error", error);
       if (error instanceof Error) {
         alert(`Opponent move request failed: ${error.message}`);
       }
@@ -57,7 +57,6 @@ export default function GameBoard() {
     } else return `${gameWinner} Wins`;
   };
   const DrawGameBoard = (): React.ReactNode => {
-    console.log("gameWinner", gameWinner);
     if (typeof gameWinner == "string") return;
 
     return gameState.map((row, rowIndex) => {

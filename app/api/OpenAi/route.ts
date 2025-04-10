@@ -1,5 +1,5 @@
 import { OpenAI } from "openai"; // ChatCompletion tipini ekledik
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -95,13 +95,17 @@ Respond with coordinates like 'row_column' only. No other text.
     finalMove = await getAIMove();
   } catch (error) {
     console.error("Error in AI move:", error);
+    return NextResponse.json(
+      { message: "Error in AI move:", error },
+      { status: 401 }
+    );
   }
 
   if (finalMove === null) {
-    return new Response("No valid move found", {
-      status: 404,
-      headers: { "Content-Type": "text/plain" },
-    });
+    return NextResponse.json(
+      { message: "No valid move found" },
+      { status: 401 }
+    );
   }
 
   return new Response(JSON.stringify(finalMove), {
