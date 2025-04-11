@@ -1,8 +1,10 @@
 "use client";
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import Cell from "./components/cell";
 import { checkWinner } from "./winCases";
 import getOpponentMove from "./opponent";
+import Settings from "./components/settings/settingsPopup";
+import SettingsIcon from "./components/settings/settingsIcon";
 
 export default function GameBoard() {
   const [gameState, SetGameState] = useState<string[][]>([
@@ -12,11 +14,33 @@ export default function GameBoard() {
   ]);
   const [gameWinner, setGameWinner] = useState<string | null>(null);
   const [xTurn, SetXTurn] = useState<boolean>(true);
-  const [vsAI, SetVsAI] = useState<boolean>(true);
+  const [vsAI, SetVsAI] = useState<boolean>(false);
+  const [showSettings, SetShowSettings] = useState<boolean>(true);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const setGameType = (gameType: string) => {
+    gameType === "classic" ? SetVsAI(false) : SetVsAI(true);
+    console.log(gameType);
+  };
+
+  useEffect(() => {
+    const aud = new Audio("./sounds/pick.mp3");
+    aud.playbackRate = 3;
+    aud.volume = 1;
+    audioRef.current = aud;
+
+    return () => {
+      aud.pause();
+      aud.currentTime = 0;
+    };
+  }, []);
+
+  useEffect(() => {
+    resetTheGame();
+  }, [vsAI]);
 
   useEffect(() => {
     const winner = checkWinner(gameState);
-
     if (winner != null) {
       setGameWinner(winner);
       return;
@@ -24,6 +48,14 @@ export default function GameBoard() {
 
     if (!xTurn && vsAI) opponentAiMove();
   }, [xTurn, gameState]);
+
+  const playSound = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
+    }
+  };
 
   const opponentAiMove = async () => {
     try {
@@ -44,6 +76,7 @@ export default function GameBoard() {
     const tempGameState = gameState;
     if (tempGameState[row][col] === "0") {
       tempGameState[row][col] = xTurn ? "x" : "o";
+      playSound();
 
       SetGameState([...tempGameState]);
       SetXTurn(!xTurn);
@@ -66,6 +99,7 @@ export default function GameBoard() {
             key={`${rowIndex}_${itemIndex}`}
             cellId={`${rowIndex}_${itemIndex}`}
             disable={!xTurn && vsAI}
+            xTurn={xTurn}
             cellAction={cellAction}
           >
             {cell === "0" ? "" : cell}
@@ -89,11 +123,16 @@ export default function GameBoard() {
 
   return (
     <>
-      {!gameWinner && (
-        <div className="flex w-full text-4xl text-blue-400 text-center justify-center align-center   ">
-          <span>Turn: {xTurn ? "X" : "O"}</span>
-        </div>
-      )}
+      {/* <div className="flex w-full">
+        <NeonText
+          text="Win Streak: "
+          baseColor="#fff"
+          glowColor="#39FF14"
+          isFlickering={false}
+          lessGlow={true}
+        />
+      </div> */}
+
       <div className="flex text-green-400">
         <span className="text-5xl uppercase">{showGameResult()}</span>
       </div>
@@ -110,6 +149,12 @@ export default function GameBoard() {
           </span>
         </button>
       )}
+      <Settings
+        open={showSettings}
+        setOpen={SetShowSettings}
+        setGameType={setGameType}
+      />
+      <SettingsIcon onClick={() => SetShowSettings(true)} />
     </>
   );
 }

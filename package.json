@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.1",
+    "@heroicons/react": "^2.2.0",
     "@huggingface/inference": "^2.8.1",
     "@langchain/community": "^0.3.40",
     "@langchain/core": "^0.3.44",

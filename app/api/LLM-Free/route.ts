@@ -1,17 +1,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { HuggingFaceInference } from "@langchain/community/llms/hf";
 import { StringOutputParser } from "@langchain/core/output_parsers";
+import { NextRequest, NextResponse } from "next/server";
 
 type RequestBody = {
   gameState: string[][];
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export async function POST(request: NextRequest): Promise<Response> {
   try {
-    const { gameState }: RequestBody = req.body;
+    const { gameState }: RequestBody = await request.json();
 
     const promptTemplate = () => "hey";
     const model = new HuggingFaceInference({
@@ -51,10 +49,16 @@ export default async function handler(
     };
 
     const finalMove = await getAIMove();
-    res.status(201).json({ move: finalMove });
+    return NextResponse.json(JSON.stringify(finalMove), {
+      status: 201,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
     console.error("Error in AI move:", error);
-    res.status(500).json({ error: "Error in AI move" });
+    return NextResponse.json(
+      { message: "No valid move found" },
+      { status: 401 }
+    );
   }
 }
 

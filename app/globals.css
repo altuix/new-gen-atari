@@ -10,6 +10,14 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-neon-green: #39FF14;
+  --color-neon-purple: #BC13FE;
+  --color-neon-blue: #1B03A3;
+  --color-neon-red: #ff073a;
+  --neon-base: var(--color-white); /* Varsayılan beyaz renk */
+  --neon-glow: #0fa; /* Varsayılan parlak gölge rengi */
+
 }
 
 @media (prefers-color-scheme: dark) {

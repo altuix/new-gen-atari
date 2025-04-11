@@ -1,0 +1,63 @@
+
+
+
+.tiltNeon{
+  font-family: var(--font-tilt-neon);
+}
+
+
+.neonText {
+  color: var(--neon-base);
+}
+
+.neonText.static {
+  text-shadow:
+      0 0 4px var(--neon-base),
+      0 0 11px var(--neon-base),
+      0 0 19px var(--neon-base),
+      0 0 40px var(--neon-glow),
+      0 0 80px var(--neon-glow),
+      0 0 90px var(--neon-glow);
+      /* 0 0 100px var(--neon-glow),
+      0 0 150px var(--neon-glow); */
+}
+
+.neonText.flickering {
+  animation: flicker 1.5s infinite alternate;
+}
+
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+      text-shadow:
+          0 0 4px var(--neon-base),
+          0 0 11px var(--neon-base),
+          0 0 19px var(--neon-base),
+          0 0 40px var(--neon-glow),
+          0 0 80px var(--neon-glow),
+          0 0 90px var(--neon-glow);
+          /* 0 0 100px var(--neon-glow),
+          0 0 150px var(--neon-glow); */
+  }
+  20%, 24%, 55% {
+      text-shadow: none;
+  }
+}
+
+.neonText.lessGlow {
+  text-shadow:
+      0 0 4px var(--neon-base),
+      0 0 11px var(--neon-glow);
+    
+ 
+
+      /* 0 0 100px var(--neon-glow),
+      0 0 150px var(--neon-glow); */
+}
+
+.x-text{
+  color: var(--color-neon-blue);
+}
+
+.o-text{
+  color: var(--color-neon-red);
+}

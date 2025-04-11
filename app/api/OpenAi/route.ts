@@ -108,7 +108,7 @@ Respond with coordinates like 'row_column' only. No other text.
     );
   }
 
-  return new Response(JSON.stringify(finalMove), {
+  return new NextResponse(JSON.stringify(finalMove), {
     status: 201,
     headers: { "Content-Type": "application/json" },
   });
