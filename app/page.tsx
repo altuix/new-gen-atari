@@ -24,15 +24,15 @@ export default function Home() {
         const environment = new Environment(typo, particle);
       };
 
-      let typo = null;
+      let typo: any = null;
       const loader = new FontLoader(manager);
       const font = loader.load(
         "/fonts/helvetiker_regular.typeface.json",
-        function (font) {
+        function (font: any) {
           typo = font;
         },
         undefined,
-        (error) => {
+        (error: any) => {
           console.error("Font yükleme hatası:", error);
         }
       );
@@ -53,10 +53,10 @@ export default function Home() {
       particle: any;
       container: HTMLDivElement;
       scene: THREE.Scene;
-      camera: THREE.PerspectiveCamera;
-      renderer: THREE.WebGLRenderer;
-      composer: EffectComposer;
-      createParticles: CreateParticles;
+      camera: THREE.PerspectiveCamera | any;
+      renderer: THREE.WebGLRenderer | any;
+      composer: any;
+      createParticles: CreateParticles | any;
 
       constructor(font: any, particle: any) {
         this.font = font;
@@ -155,7 +155,7 @@ export default function Home() {
       particleImg: any;
       camera: THREE.PerspectiveCamera;
       renderer: THREE.WebGLRenderer;
-      composer: EffectComposer;
+      composer: any;
       raycaster: THREE.Raycaster;
       mouse: THREE.Vector2;
       colorChange: THREE.Color;
@@ -169,10 +169,10 @@ export default function Home() {
         area: number;
         ease: number;
       };
-      planeArea: THREE.Mesh;
-      particles: THREE.Points;
-      geometryCopy: THREE.BufferGeometry;
-      currenPosition: THREE.Vector3 | undefined;
+      planeArea: THREE.Mesh | any;
+      particles: THREE.Points | any;
+      geometryCopy: THREE.BufferGeometry | any;
+      currenPosition: THREE.Vector3 | any;
 
       constructor(
         scene: THREE.Scene,
@@ -180,7 +180,7 @@ export default function Home() {
         particleImg: any,
         camera: THREE.PerspectiveCamera,
         renderer: THREE.WebGLRenderer,
-        composer: EffectComposer
+        composer: any
       ) {
         this.scene = scene;
         this.font = font;
