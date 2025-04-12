@@ -1,0 +1,74 @@
+/* styles/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif !important;
+  color: white;
+  font-size: 9px;
+}
+
+#magic {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: block;
+  top: 0;
+  left: 0;
+  z-index: -9999;
+}
+
+.playground {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.bottomPosition {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.minText {
+  font-size: 14px;
+}
+
+a {
+  color: white;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+}
+
+/* 550px ve altı için responsive düzen */
+@media (max-width: 550px) {
+  .bottomPosition {
+    margin-bottom: 20px; /* Alt boşluğu azalt */
+  }
+
+  .bottomPosition div {
+    display: flex;
+    flex-direction: column; /* Menüyü tek sütuna düşür */
+    gap: 8px; /* Elemanlar arası boşluğu azalt */
+  }
+
+  a {
+    font-size: 10px; /* Yazı boyutunu küçült */
+  }
+
+  .logo {
+    width: 40px; /* Logoyu küçült */
+    height: 40px;
+  }
+}
