@@ -25,11 +25,11 @@ const plans = [
     description: "Versus to 4o-mini",
     id: "openai",
   },
-  {
-    name: "Minimax Mod",
-    description: "Classic X O X experience, Minimax algorithm Versus You ",
-    id: "minimax",
-  },
+  // {
+  //   name: "Minimax Mod",
+  //   description: "Classic X O X experience, Minimax algorithm Versus You ",
+  //   id: "minimax",
+  // },
 ];
 
 export default function Settings({
