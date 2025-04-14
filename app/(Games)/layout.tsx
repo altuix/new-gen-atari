@@ -3,6 +3,7 @@ import React, { ReactNode } from "react";
 import { Tilt_Neon } from "next/font/google";
 import "./game.css";
 import NeonText from "./TicTacToe/components/neonText";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const tiltNeon = Tilt_Neon({
   variable: "--font-tilt-neon",
@@ -53,6 +54,7 @@ export default function GamesLayout({ children }: { children: ReactNode }) {
           {children}
         </main>
       </div>
+      <SpeedInsights />
     </div>
   );
 }
