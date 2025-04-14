@@ -53,7 +53,6 @@ Respond with coordinates like 'row_column' only. No other text.
       console.log("prompt", prompt);
 
       try {
-        // response’u ChatCompletion tipiyle tanımladık
         const response = await client.chat.completions.create({
           model: "gpt-4o-mini",
           messages: [{ role: "user", content: prompt }],
@@ -61,7 +60,6 @@ Respond with coordinates like 'row_column' only. No other text.
           max_tokens: 10,
         });
 
-        // choices[0]’ın varlığını kontrol ediyoruz
         const suggestedMove = response?.choices?.[0]?.message?.content;
         console.log("suggestedMove", suggestedMove);
         console.log("response", response);

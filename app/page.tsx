@@ -93,7 +93,7 @@ export default function Home() {
 
       createCamera() {
         const isMobile = window.innerWidth <= 550;
-        const fov = isMobile ? 75 : 65; // Mobil cihazlarda daha geniş bir görüş açısı
+        const fov = isMobile ? 75 : 65;
         this.camera = new THREE.PerspectiveCamera(
           fov,
           this.container.clientWidth / this.container.clientHeight,
