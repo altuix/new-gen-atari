@@ -2,7 +2,9 @@
 
 Welcome to **New Gen Atari**, a playful sandbox where we transform simple games like Tic-Tac-Toe with AI, overengineering, and a touch of chaos. Why? It’s fun, and we learn a lot along the way! Think of it as a modern spin on retro gaming—without pixelated graphics (for now).
 
-Our first project? An **AI-powered Tic-Tac-Toe** that evolved from basic two-player mode to a wild ride with Hugging Face and OpenAI. Check out the full story on [Dev.to](link coming soon!) and explore the code [here](https://github.com/altuix/new-gen-atari).
+Our first project? An **AI-powered Tic-Tac-Toe** that evolved from basic two-player mode to a wild ride with Hugging Face and OpenAI. Check out the full story on [Dev.to](link coming soon!) and explore the code (https://github.com/altuix/new-gen-atari).
+
+Live Demo : https://new-gen-atari.vercel.app/
 
 ## What’s This About?
 
