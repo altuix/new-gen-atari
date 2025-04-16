@@ -1,10 +1,9 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #ffffff;
+  --background: #000;
 }
 
 @theme inline {
@@ -21,13 +20,13 @@
   --neon-glow: #0fa; /* Varsayılan parlak gölge rengi */
 
 }
-
+/* 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   background: var(--background);
